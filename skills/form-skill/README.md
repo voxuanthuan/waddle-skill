@@ -1,85 +1,144 @@
-# Shadcn Form Generator
+# Form Generator Skill
 
-A powerful Claude Code skill that generates production-ready React form components using shadcn/ui, React Hook Form, and Yup validation.
+A production-ready Claude Code skill that generates React forms with shadcn/ui, React Hook Form, and Yup validation.
 
 ## Overview
 
-This skill automates the creation of type-safe, validated form components following modern React patterns and best practices.
+This skill automates the creation of type-safe, validated form components following modern React patterns and best practices. It follows the official Claude Code skill structure with YAML frontmatter.
+
+## Skill Structure
+
+```
+form-skill/
+├── skill.md          # Main skill file with YAML frontmatter
+├── README.md         # This documentation
+└── examples/         # Working examples
+    ├── contact-form.tsx
+    └── product-form.tsx
+```
+
+### skill.md Format
+
+```yaml
+---
+name: Form Generator
+description: Use when generating React forms with shadcn/ui, React Hook Form, and Yup validation
+---
+```
+
+The skill file includes:
+- **When to Use** - Clear criteria for invoking the skill
+- **Required Information** - What to ask the user
+- **Code Templates** - Specific patterns for imports, validation, components, and fields
+- **Critical Rules** - Non-negotiable patterns (mutation callbacks, refetchQueries limits)
+- **Workflow** - Step-by-step generation process
 
 ## Features
 
 - Type-safe forms with TypeScript and Yup schema inference
 - React Hook Form integration with yupResolver
-- shadcn/ui components - Beautiful, accessible form components
-- Apollo Client mutations with automatic refetch queries
-- Toast notifications for success/error handling
-- Multiple field types:
-  - Text inputs
-  - Currency inputs (with number formatting)
-  - Date pickers
-  - Radio groups (Yes/No)
-  - Textareas
-  - Async select (single/multi)
-- Validation patterns with proper error messages
-- Loading states and disabled form handling
-- Accessibility built-in with shadcn/ui
+- shadcn/ui components - Beautiful, accessible UI
+- Apollo Client mutations with proper callback handling
+- Toast notifications for success/error
+- Multiple field types with disabled state support
+- Validation with proper error messages
+- Conditional field rendering
+
+## Field Types
+
+| Type | Description | Example Use Case |
+|------|-------------|------------------|
+| `text` | Standard text input | Names, titles, descriptions |
+| `number` | Numeric input | Quantities, IDs |
+| `currency` | Formatted currency with $ | Prices, amounts, balances |
+| `date` | Date picker | Birth dates, deadlines |
+| `textarea` | Multi-line text | Comments, descriptions |
+| `radio` | Yes/No radio group | Boolean choices |
+| `select` | Async single select | Categories, users |
+| `multi-select` | Async multi select | Tags, permissions |
 
 ## Usage
 
 Invoke the skill in Claude Code:
 
 ```
-/shadcn-form-generator
+/form-skill
 ```
 
-### Example: Simple Contact Form
+The skill will ask you for:
+1. Form name
+2. Form fields (name, type, validation, label)
+3. GraphQL mutation
+4. Refetch queries (limit 1-2)
+5. Success message
+6. Props (ids, isDetail flag, etc.)
+
+## Examples
+
+### Simple Contact Form
 
 **Prompt:**
 ```
-Create a ContactForm with:
+Create ContactForm with:
 - name (required text)
 - email (required email)
-- message (required textarea)
-- Mutation: CREATE_CONTACT_MESSAGE
-- Success: "Message sent successfully!"
+- message (required textarea, min 10 chars)
+- Mutation: CREATE_CONTACT
+- Success: MESSAGE.CONTACT_SUCCESS
 ```
 
-**Generated Output:**
-Complete form component with Yup validation schema, React Hook Form setup, FormFields for each input, Apollo mutation integration, and error handling.
+**Output:** Complete form with validation, error handling, and submission logic.
 
-### Example: Product Form with Complex Fields
+### Complex Product Form
 
 **Prompt:**
 ```
-Create a ProductForm with:
+Create ProductForm with:
 - name (required text)
 - price (required currency)
-- category (required select)
-- isActive (required radio yes/no)
 - releaseDate (optional date)
+- isActive (required radio yes/no)
 - description (optional textarea)
-- Mutation: CREATE_PRODUCT
-- Refetch: PRODUCTS_QUERY
-- Success: "Product created successfully!"
+- Mutation: UPDATE_PRODUCT
+- Refetch: GET_PRODUCTS
+- Props: productId, isDetail
 ```
 
-## Field Types
+**Output:** Form with conditional logic, proper date/boolean handling, and disabled state.
 
-| Type | Description | Validation Options |
-|------|-------------|-------------------|
-| `text` | Standard text input | required, min, max, pattern |
-| `email` | Email input with validation | required, email |
-| `number` | Numeric input | required, min, max, positive |
-| `currency` | Formatted currency input | required, min, max, positive |
-| `date` | Date picker | required, min, max |
-| `textarea` | Multi-line text | required, min, max |
-| `radio` | Yes/No radio group | required |
-| `select` | Async single select | required |
-| `multi-select` | Async multi select | required, min items |
+## Critical Patterns
+
+### Mutation Callbacks
+✅ Use callbacks in mutation call:
+```typescript
+mutationName({
+  variables: {},
+  onCompleted: (data) => {},
+  onError: (error) => {}
+})
+```
+
+❌ Don't use in useMutation:
+```typescript
+const [mutation] = useMutation(MUTATION, {
+  onCompleted: () => {}  // DON'T DO THIS
+})
+```
+
+### RefetchQueries Limit
+- ⚠️ Limit to 1-2 queries maximum
+- Only use when cache update is complex
+- Avoid if data refetches naturally
+
+### Required Patterns
+- `SubmitHandler<FormValues>` for type safety
+- `useMemo` for defaultValues
+- `useEffect` with `reset()` for updates
+- `disableForm = useMemo(() => loading || isDetail, [...])`
+- Transform dates with `moment().toString()`
+- Parse booleans for radio groups
 
 ## Dependencies
-
-Your project should have these dependencies installed:
 
 ```json
 {
@@ -88,33 +147,35 @@ Your project should have these dependencies installed:
     "react-hook-form": "^7.0.0",
     "yup": "^1.0.0",
     "@hookform/resolvers": "^3.0.0",
-    "@apollo/client": "^3.0.0"
+    "@apollo/client": "^3.0.0",
+    "react-toast-notifications": "^2.0.0",
+    "moment": "^2.0.0",
+    "react-number-format": "^5.0.0"
   }
 }
 ```
 
-For shadcn/ui components, follow the [shadcn/ui installation guide](https://ui.shadcn.com/docs/installation).
+Install shadcn/ui components: [Installation Guide](https://ui.shadcn.com/docs/installation)
 
-## Examples
+## Working Examples
 
-See the `examples/` directory for complete working examples:
-- `contact-form.tsx` - Simple contact form
-- `product-form.tsx` - Complex form with multiple field types
+See `examples/` directory:
+- `contact-form.tsx` - Simple form with text, email, textarea
+- `product-form.tsx` - Complex form with currency, date, radio, conditional fields
 
-## Best Practices
+## Best Practices Enforced
 
-The skill enforces these best practices:
-
-1. **Type Safety**: All forms are fully typed with TypeScript
-2. **Validation**: Yup schemas with proper labels for error messages
-3. **Accessibility**: Using shadcn/ui's accessible components
-4. **Error Handling**: Consistent error handling with toast notifications
-5. **Performance**: useCallback for submit handlers, proper memoization
-6. **UX**: Loading states, disabled inputs, real-time validation
+1. **Type Safety** - Full TypeScript coverage with Yup inference
+2. **Validation** - Clear error messages with `.label()`
+3. **Accessibility** - shadcn/ui accessible components
+4. **Error Handling** - Consistent with `extractAPIValidationErrorToast`
+5. **Performance** - Proper memoization and conditional rendering
+6. **UX** - Loading states, disabled inputs, real-time validation
+7. **Data Transformation** - Proper date/boolean handling before submit
 
 ## Version
 
-v1.0.0
+1.0.0
 
 ## License
 
