@@ -1,0 +1,54 @@
+{
+  "name": "waddle-skills",
+  "owner": {
+    "name": "Vo Xuan Thuan",
+    "email": "voxuanthuan@example.com",
+    "github": "voxuanthuan"
+  },
+  "description": "Production-ready Claude Code skills for faster, high-quality code generation",
+  "repository": "https://github.com/voxuanthuan/waddle-skill",
+  "homepage": "https://github.com/voxuanthuan/waddle-skill#readme",
+  "license": "MIT",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "form-skill",
+      "source": {
+        "type": "github",
+        "repo": "voxuanthuan/waddle-skill",
+        "path": "skills/form-skill/skill.md"
+      },
+      "description": "Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation",
+      "version": "1.0.0",
+      "author": {
+        "name": "voxuanthuan",
+        "github": "voxuanthuan"
+      },
+      "category": "frontend",
+      "tags": ["react", "forms", "shadcn-ui", "typescript", "validation"],
+      "dependencies": {
+        "react": "^18.0.0",
+        "react-hook-form": "^7.0.0",
+        "yup": "^1.0.0",
+        "@hookform/resolvers": "^3.0.0"
+      },
+      "status": "stable",
+      "installCommand": "/form-skill",
+      "readme": "https://github.com/voxuanthuan/waddle-skill/blob/main/skills/form-skill/README.md",
+      "examples": [
+        "https://github.com/voxuanthuan/waddle-skill/blob/main/skills/form-skill/examples/contact-form.tsx",
+        "https://github.com/voxuanthuan/waddle-skill/blob/main/skills/form-skill/examples/product-form.tsx"
+      ]
+    }
+  ],
+  "metadata": {
+    "totalPlugins": 1,
+    "lastUpdated": "2025-10-20",
+    "maintainers": [
+      {
+        "name": "voxuanthuan",
+        "github": "voxuanthuan"
+      }
+    ]
+  }
+}
