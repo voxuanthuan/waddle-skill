@@ -1,14 +1,9 @@
 {
-  "name": "waddle-skills",
+  "name": "waddle-skill",
   "owner": {
     "name": "Vo Xuan Thuan",
-    "github": "voxuanthuan"
+    "email": "voxuanthuan280194@gmail.com"
   },
-  "description": "Production-ready Claude Code skills for faster, high-quality code generation",
-  "repository": "https://github.com/voxuanthuan/waddle-skill",
-  "homepage": "https://github.com/voxuanthuan/waddle-skill#readme",
-  "license": "MIT",
-  "version": "1.0.0",
   "plugins": [
     {
       "name": "form-skill",
@@ -19,21 +14,9 @@
       },
       "description": "Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation",
       "version": "1.0.0",
-      "category": "frontend",
-      "tags": ["react", "forms", "typescript", "shadcn-ui", "react-hook-form", "yup", "validation", "apollo-client"],
       "author": {
-        "name": "voxuanthuan"
+        "name": "Vo Xuan Thuan"
       }
     }
-  ],
-  "metadata": {
-    "totalPlugins": 1,
-    "lastUpdated": "2025-10-20",
-    "maintainers": [
-      {
-        "name": "voxuanthuan",
-        "github": "voxuanthuan"
-      }
-    ]
-  }
+  ]
 }
