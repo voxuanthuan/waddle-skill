@@ -16,7 +16,7 @@
       "source": {
         "source": "github",
         "repo": "voxuanthuan/waddle-skill",
-        "path": "skills/form-skill/skill.md"
+        "path": "plugins/frontend-developer/skills/form-skill/skill.md"
       },
       "description": "Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation",
       "version": "1.0.0",
