@@ -20,18 +20,31 @@ Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup v
 
 ```
 waddle-skills/
-├── skills/                       # All skill definitions
-│   ├── form-skill/
-│   │   ├── skill.md             # Skill prompt
-│   │   ├── README.md            # Documentation
-│   │   └── examples/            # Working examples
-│   └── [more-skills]/
+├── skills/                    # Skill definitions (core content)
+│   └── [skill-name]/
+│       ├── skill.md          # The actual skill prompt (main deliverable)
+│       ├── README.md         # Documentation for users
+│       └── examples/         # Working code examples
 |
-├── skills.json                   # Skills registry
 ├── package.json
-├── README.md                     # This file
-└── LICENSE
+├── README.md                 # This file
+├── CLAUDE.md                 # Project instructions for Claude Code
 ```
+
+### Key Components
+
+- **skills/** - Contains all skill definitions. Each skill has its own directory with:
+  - `skill.md` - The prompt that instructs Claude Code (most important file)
+  - `README.md` - User documentation with examples and usage
+  - `examples/` - Working code examples demonstrating the skill's output
+
+- **scripts/** - Installation tooling for deploying skills to Claude Code
+  - `install.js` - Main installer supporting single or multiple skill installation
+  - `install.sh` - Shell-based installer for remote installation
+
+- **templates/** - Starter templates for creating new skills
+
+- **skills.json** - Central registry listing all available skills with metadata
 
 
 ## Contributing
