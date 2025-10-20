@@ -1,0 +1,42 @@
+{
+  "name": "claude-shadcn-form-generator",
+  "version": "1.0.0",
+  "description": "A Claude Code skill for generating React forms with shadcn/ui, React Hook Form, and Yup validation",
+  "main": "install.js",
+  "bin": {
+    "install-shadcn-form-skill": "./install.js"
+  },
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "keywords": [
+    "claude-code",
+    "claude-code-skill",
+    "shadcn-ui",
+    "react-hook-form",
+    "yup",
+    "form-generator",
+    "react",
+    "typescript",
+    "form-validation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/claude-shadcn-form-generator.git"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/claude-shadcn-form-generator/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/claude-shadcn-form-generator#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "shadcn-form-generator.md",
+    "install.js",
+    "README.md",
+    "LICENSE"
+  ]
+}
