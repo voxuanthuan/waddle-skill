@@ -27,18 +27,11 @@ waddle-skills/
 │       └── examples/         # Working code examples
 │           ├── contact-form.tsx
 │           └── product-form.tsx
-├── templates/                 # Templates for creating new skills
-│   ├── skill-template.md
-│   └── README-template.md
-├── docs/                     # Documentation and guides
-│   └── CREATING_SKILLS.md
+|       (more skills can be added here)
+|
 ├── .claude-plugin/           # Claude Code marketplace configuration
 │   └── marketplace.json
-├── package.json
-├── README.md                 # This file
-├── CLAUDE.md                 # Project instructions for Claude Code
-├── LICENSE
-└── .gitignore
+
 ```
 
 ### Key Components
