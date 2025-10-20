@@ -7,7 +7,7 @@ A curated collection of production-ready Claude Code skills to supercharge your 
 Waddle Skills is an open-source repository of Claude Code skills that help you generate code faster, maintain consistency, and follow best practices. Each skill is carefully crafted to solve specific development challenges with high-quality, type-safe code generation.
 
 ## Installation 
-/plugin marketplace add https://github.com/voxuanthuan/waddle-skill
+/plugin marketplace add voxuanthuan/waddle-skill
 
 ## Available Skills
 
