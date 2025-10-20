@@ -1,4 +1,4 @@
-# Shadcn Form Generator
+# Form Skill
 
 You are a form component generator that creates React forms using shadcn/ui, React Hook Form, and Yup validation.
 
@@ -22,12 +22,14 @@ Ask the user for:
 
 ### 1. Imports Structure
 ```typescript
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm, useWatch } from 'react-hook-form'
 import * as yup from 'yup'
-import { FC, useCallback, useMemo } from 'react'
+import { FC, useCallback, useEffect, useMemo } from 'react'
 import { useMutation } from '@apollo/client'
 import { useToasts } from 'react-toast-notifications'
+import moment from 'moment'
+import { NumericFormat } from 'react-number-format'
 
 import { Button } from 'components-v2/shared/shadcn/g-button'
 import {
@@ -39,7 +41,10 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-// Add other UI components as needed (Textarea, RadioGroup, etc.)
+import { Textarea } from '@/components/ui/textarea'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import NewDateInputPicker from 'components-v2/shared/g-date-input/input-date'
+// Add other UI components as needed
 
 import { extractAPIValidationErrorToast } from 'helpers/data'
 import { MESSAGE } from 'appconfig'
@@ -57,74 +62,102 @@ const formSchema = yup.object({
   // number: yup.number().required().positive().label('Amount')
   // boolean: yup.boolean().required().label('Accepted')
   // array: yup.array().of(yup.object()).min(1).label('Items')
+  // date: yup.date().nullable().required().label('Date')
+  // currency: yup.string().required().label('Amount')
 })
 
-type FormSchemaType = yup.InferType<typeof formSchema>
+type FormValues = yup.InferType<typeof formSchema>
 ```
 
 ### 3. Component Structure
 ```typescript
-const FormComponent: FC<Props> = ({ /* props */ }) => {
+const FormComponent: FC<Props> = ({ /* props like isDetail, id, etc. */ }) => {
   const { addToast } = useToasts()
 
-  const [mutationName, { loading }] = useMutation(
-    MUTATION_NAME,
-    {
-      refetchQueries: [QUERY_TO_REFETCH],
+  // Setup default values with useMemo
+  const defaultValues = useMemo(() => {
+    return {
+      // Map existing data to form values
+      // Handle date conversions: date?.iso ? new Date(date.iso) : null
+      // Handle other transformations
     }
-  )
+  }, [/* dependencies */])
 
-  const form = useForm<FormSchemaType>({
+  const form = useForm<FormValues>({
     resolver: yupResolver(formSchema),
-    mode: 'onChange',
-    defaultValues: {
-      // Set defaults
-    }
+    defaultValues,
   })
 
-  const onSubmit = useCallback(
-    async (data: FormSchemaType) => {
-      try {
-        const result = await mutationName({
-          variables: {
-            input: {
-              // Map data to mutation input
-            },
-          },
-        })
+  const { reset } = form
 
-        if (result) {
+  // Reset form when defaultValues change
+  useEffect(() => {
+    reset(defaultValues)
+  }, [defaultValues, reset])
+
+  const [mutationName, { loading }] = useMutation(MUTATION_NAME)
+
+  // Watch fields if conditional logic is needed
+  const watchedField = form.watch('fieldName')
+
+  const disableForm = useMemo(() => loading || isDetail, [isDetail, loading])
+
+  const onSubmit: SubmitHandler<FormValues> = (values) => {
+    // Transform values before submitting
+    // Example: Convert date to moment string
+    const date = values?.date ? moment(values.date).toString() : null
+    // Example: Parse boolean strings
+    const booleanField = values?.booleanField?.toString() === 'true'
+
+    mutationName({
+      variables: {
+        // Include required IDs from props
+        id,
+        // Spread transformed values
+        ...values,
+        booleanField,
+        date,
+      },
+      refetchQueries: [QUERY_TO_REFETCH],
+      onCompleted: (data) => {
+        if (data) {
           addToast(MESSAGE.SUCCESS_MESSAGE, {
             appearance: 'success',
             autoDismiss: true,
           })
-          // Call any cleanup callbacks
+          // Call onComplete callback if provided
+          // onComplete?.()
         }
-      } catch (error) {
+      },
+      onError: (error) => {
         extractAPIValidationErrorToast(error, addToast)
-      }
-    },
-    [/* dependencies */]
-  )
+      },
+    })
+  }
+
+  // Helper functions if needed
+  const parseBooleanOrNull = useCallback((value: string) => {
+    if (value === 'true') return true
+    if (value === 'false') return false
+    return null
+  }, [])
 
   return (
     <Form {...form}>
       <form
-        className="container mx-auto px-0"
-        method="post"
-        noValidate
         onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 flex flex-col"
       >
         {/* Generate FormFields */}
 
-        <div className="flex items-center justify-center gap-2 mt-4">
+        <div className="flex items-center">
           <Button
-            type="submit"
+            disabled={disableForm}
+            className="py-2 px-6 m-auto"
             variant="primary"
-            disabled={loading}
-            className="bg-newExtraDarkPink rounded-full hover:bg-newExtraDarkPink hover:opacity-80 text-white hover:text-white text-sm px-6"
+            type="submit"
           >
-            Submit
+            Save
           </Button>
         </div>
       </form>
@@ -144,7 +177,7 @@ const FormComponent: FC<Props> = ({ /* props */ }) => {
     <FormItem>
       <FormLabel>Label <i className="text-red-500">*</i></FormLabel>
       <FormControl>
-        <Input {...field} placeholder="Enter text" />
+        <Input {...field} placeholder="Enter text" disabled={disableForm} />
       </FormControl>
       <FormMessage className="text-red-400" />
     </FormItem>
@@ -164,6 +197,7 @@ const FormComponent: FC<Props> = ({ /* props */ }) => {
         <div className="relative">
           <span className="absolute left-1 top-1/2 -translate-y-1/2">$</span>
           <NumericFormat
+            disabled={disableForm}
             className="p-4"
             value={value}
             type="text"
@@ -194,6 +228,7 @@ const FormComponent: FC<Props> = ({ /* props */ }) => {
           onValueChange={(value) => field.onChange(value === 'true')}
           value={field.value === null ? undefined : field?.value?.toString()}
           className="flex space-x-4"
+          disabled={disableForm}
         >
           <FormItem className="flex items-center space-x-2">
             <FormControl>
@@ -224,6 +259,7 @@ const FormComponent: FC<Props> = ({ /* props */ }) => {
     <FormItem>
       <FormLabel>Date <i className="text-red-500">*</i></FormLabel>
       <NewDateInputPicker
+        disabled={disableForm}
         value={field.value}
         className="w-full"
         onChange={(date) => field.onChange(date)}
@@ -244,6 +280,7 @@ const FormComponent: FC<Props> = ({ /* props */ }) => {
       <FormLabel>Description</FormLabel>
       <FormControl>
         <Textarea
+          disabled={disableForm}
           className="focus-visible:ring-slate-400"
           rows={4}
           value={value}
@@ -293,13 +330,46 @@ const FormComponent: FC<Props> = ({ /* props */ }) => {
 3. Mark required fields with red asterisk `<i className="text-red-500">*</i>`
 4. Use `extractAPIValidationErrorToast` for error handling
 5. Show success toast from `MESSAGE` constants in appconfig
-6. Use `useCallback` for submit handler
-7. Disable submit button when loading
-8. Use `mode: 'onChange'` for real-time validation
-9. Include `noValidate` on form to prevent browser validation
-10. Wrap currency inputs with `$` symbol
-11. Use `FormMessage className="text-red-400"` for error messages
-12. Use appropriate Tailwind classes for consistent styling
+6. Use `SubmitHandler<FormValues>` type for onSubmit function
+7. Disable submit button when loading or in detail/view mode
+8. Include `noValidate` on form to prevent browser validation
+9. Wrap currency inputs with `$` symbol
+10. Use `FormMessage className="text-red-400"` for error messages
+11. Use appropriate Tailwind classes for consistent styling
+12. **IMPORTANT - Mutation Callbacks**: Always use `onCompleted` and `onError` callbacks in the mutation call, NOT in useMutation options:
+    ```typescript
+    // ✅ CORRECT - Callbacks in mutation call
+    mutationName({
+      variables: { ... },
+      refetchQueries: [QUERY],
+      onCompleted: (data) => { /* handle success */ },
+      onError: (error) => { /* handle error */ }
+    })
+
+    // ❌ WRONG - Don't use callbacks in useMutation
+    const [mutationName] = useMutation(MUTATION, {
+      onCompleted: () => {},  // Don't do this
+      onError: () => {}       // Don't do this
+    })
+    ```
+13. **IMPORTANT - RefetchQueries Limit**: Only use `refetchQueries` when absolutely necessary. Prefer updating cache manually or using optimistic updates:
+    - ✅ Use refetchQueries: For complex queries where manual cache update is difficult
+    - ❌ Avoid refetchQueries: When you can update the cache directly
+    - ⚠️ Limit to 1-2 queries maximum to avoid performance issues
+    - Consider if the data will be refetched naturally when user navigates
+    ```typescript
+    // Example: Only refetch the specific query needed
+    refetchQueries: [GET_ACTIVE_COMPLIANCE_REPORT]  // ✅ Specific and necessary
+
+    // Avoid refetching multiple queries
+    refetchQueries: [QUERY1, QUERY2, QUERY3]  // ❌ Too many, impacts performance
+    ```
+14. Use `useMemo` for defaultValues to prevent unnecessary re-renders
+15. Use `useEffect` with `reset()` to update form when defaultValues change
+16. Use `form.watch()` for conditional field rendering
+17. Use `parseBooleanOrNull` helper for nullable boolean radio fields
+18. Transform data appropriately before submitting (dates to moment strings, boolean parsing, etc.)
+19. Include `disableForm` logic that combines `loading` and `isDetail` states
 
 ## Output
 Generate:

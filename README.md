@@ -8,7 +8,7 @@ Waddle Skills is an open-source repository of Claude Code skills that help you g
 
 ## Available Skills
 
-### 1. Shadcn Form Generator
+### 1. Form Skill
 **Category**: Frontend | **Status**: Stable | **Version**: 1.0.0
 
 Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation.
@@ -20,9 +20,9 @@ Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup v
 - Apollo Client integration
 - Accessibility built-in
 
-**Command**: `/shadcn-form-generator`
+**Command**: `/form-skill`
 
-[📖 Full Documentation](skills/shadcn-form-generator/README.md)
+[📖 Full Documentation](skills/form-skill/README.md)
 
 ---
 
@@ -57,7 +57,7 @@ git clone https://github.com/voxuanthuan/waddle-skill.git
 cd waddle-skill
 
 # Install specific skills
-node scripts/install.js shadcn-form-generator
+node scripts/install.js form-skill
 
 # Or install all
 node scripts/install.js --all
@@ -70,8 +70,8 @@ node scripts/install.js --all
 mkdir -p .claude/skills
 
 # Download specific skill
-curl -o .claude/skills/shadcn-form-generator.md \
-  https://raw.githubusercontent.com/voxuanthuan/waddle-skill/main/skills/shadcn-form-generator/skill.md
+curl -o .claude/skills/form-skill.md \
+  https://raw.githubusercontent.com/voxuanthuan/waddle-skill/main/skills/form-skill/skill.md
 ```
 
 ## For Teams & Organizations
@@ -88,7 +88,7 @@ Setting this up for your team? We've got you covered:
 After installation, skills are immediately available in Claude Code:
 
 ```
-/shadcn-form-generator
+/form-skill
 ```
 
 Each skill will:
@@ -102,7 +102,7 @@ Each skill will:
 ```
 waddle-skills/
 ├── skills/                       # All skill definitions
-│   ├── shadcn-form-generator/
+│   ├── form-skill/
 │   │   ├── skill.md             # Skill prompt
 │   │   ├── README.md            # Documentation
 │   │   └── examples/            # Working examples
@@ -127,7 +127,7 @@ waddle-skills/
 ## Skills by Category
 
 ### Frontend
-- [Shadcn Form Generator](skills/shadcn-form-generator/) - React forms with shadcn/ui
+- [Form Skill](skills/form-skill/) - React forms with shadcn/ui
 
 ### Backend
 - *Coming soon*
@@ -224,7 +224,7 @@ All skills in this repository follow these principles:
 
 ### v1.0.0 (2025-10-20)
 - Initial release
-- Shadcn Form Generator skill
+- Form Skill (shadcn/ui form generator)
 - Multi-skill infrastructure
 - Installation scripts
 - Documentation suite
