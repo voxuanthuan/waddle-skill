@@ -20,15 +20,9 @@
       "description": "Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation",
       "version": "1.0.0",
       "category": "frontend",
-      "tags": ["react", "forms", "typescript", "shadcn-ui", "react-hook-form", "yup", "validation"],
+      "tags": ["react", "forms", "typescript", "shadcn-ui", "react-hook-form", "yup", "validation", "apollo-client"],
       "author": {
         "name": "voxuanthuan"
-      },
-      "dependencies": {
-        "shadcn-ui": "required",
-        "react-hook-form": "^7.0.0",
-        "yup": "^1.0.0",
-        "@apollo/client": "^3.0.0"
       }
     }
   ],
