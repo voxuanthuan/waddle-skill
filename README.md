@@ -37,21 +37,38 @@ This skill automates the creation of type-safe, validated form components follow
   - Yup
   - Apollo Client (optional, for GraphQL mutations)
 
-### Setup
+### Quick Install (Choose One)
 
-1. Create a `.claude/skills` directory in your project root (if it doesn't exist):
+#### Option 1: NPM Package (Recommended)
+
 ```bash
-mkdir -p .claude/skills
+npm install --save-dev claude-shadcn-form-generator
 ```
 
-2. Download the skill file:
+The skill will be automatically installed to `.claude/skills/` after installation.
+
+#### Option 2: One-Line Installer
+
 ```bash
+curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/claude-shadcn-form-generator/main/install.sh | bash
+```
+
+#### Option 3: Manual Download
+
+```bash
+mkdir -p .claude/skills
 curl -o .claude/skills/shadcn-form-generator.md https://raw.githubusercontent.com/YOUR_USERNAME/claude-shadcn-form-generator/main/shadcn-form-generator.md
 ```
 
-Or manually copy the `shadcn-form-generator.md` file to `.claude/skills/` in your project.
+### For Teams & Organizations
 
-3. The skill will be automatically available in Claude Code!
+Setting this up for your team? See our comprehensive guides:
+
+- **[Installation Guide](INSTALLATION.md)** - 9 different installation methods
+- **[Team Distribution Guide](TEAM_GUIDE.md)** - Share with coworkers easily
+- **[Marketplace Setup](MARKETPLACE.md)** - Create your own skill marketplace
+
+The skill will be automatically available in Claude Code after installation!
 
 ## Usage
 
@@ -150,6 +167,12 @@ You can customize the generated code after creation to fit your specific needs.
 .
 ├── README.md                          # This file
 ├── shadcn-form-generator.md          # The Claude Code skill
+├── INSTALLATION.md                    # Comprehensive installation guide
+├── TEAM_GUIDE.md                      # Team distribution guide
+├── MARKETPLACE.md                     # Marketplace setup guide
+├── package.json                       # NPM package configuration
+├── install.sh                         # Shell installation script
+├── install.js                         # Node.js installation script
 ├── examples/                          # Example generated forms
 │   ├── contact-form.tsx
 │   ├── product-form.tsx
@@ -206,6 +229,13 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 - Built for [Claude Code](https://claude.com/claude-code)
 - Uses [shadcn/ui](https://ui.shadcn.com) components
 - Inspired by modern React form patterns
+
+## Documentation
+
+- **[Installation Guide](INSTALLATION.md)** - Multiple installation methods
+- **[Team Guide](TEAM_GUIDE.md)** - Share with your team
+- **[Marketplace Guide](MARKETPLACE.md)** - Create a skill marketplace
+- **[Examples](./examples)** - Sample generated forms
 
 ## Support
 
