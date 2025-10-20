@@ -1,41 +1,46 @@
 {
-  "name": "claude-shadcn-form-generator",
+  "name": "waddle-skills",
   "version": "1.0.0",
-  "description": "A Claude Code skill for generating React forms with shadcn/ui, React Hook Form, and Yup validation",
-  "main": "install.js",
+  "description": "A curated collection of production-ready Claude Code skills to supercharge your development workflow",
+  "main": "scripts/install.js",
   "bin": {
-    "install-shadcn-form-skill": "./install.js"
+    "waddle-skills-install": "./scripts/install.js"
   },
   "scripts": {
-    "postinstall": "node install.js"
+    "install-skills": "node scripts/install.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "claude-code",
-    "claude-code-skill",
+    "claude-code-skills",
+    "code-generation",
+    "developer-tools",
     "shadcn-ui",
-    "react-hook-form",
-    "yup",
-    "form-generator",
     "react",
     "typescript",
-    "form-validation"
+    "form-generator",
+    "productivity",
+    "automation"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/claude-shadcn-form-generator.git"
+    "url": "https://github.com/voxuanthuan/waddle-skill.git"
   },
-  "author": "Your Name",
+  "author": "Thuan vo",
+  "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/claude-shadcn-form-generator/issues"
+    "url": "https://github.com/voxuanthuan/waddle-skill/issues"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/claude-shadcn-form-generator#readme",
+  "homepage": "https://github.com/voxuanthuan/waddle-skill#readme",
   "engines": {
     "node": ">=14.0.0"
   },
   "files": [
-    "shadcn-form-generator.md",
-    "install.js",
+    "skills/",
+    "scripts/",
+    "templates/",
+    "skills.json",
     "README.md",
     "LICENSE"
   ]

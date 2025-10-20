@@ -1,260 +1,293 @@
-# Shadcn Form Generator - Claude Code Skill
+# Waddle Skills - Claude Code Skills Collection
 
-A powerful Claude Code skill that generates production-ready React form components using shadcn/ui, React Hook Form, and Yup validation.
+A curated collection of production-ready Claude Code skills to supercharge your development workflow.
 
 ## Overview
 
-This skill automates the creation of type-safe, validated form components following modern React patterns and best practices. Perfect for teams building applications with shadcn/ui and looking to maintain consistency across their forms.
+Waddle Skills is an open-source repository of Claude Code skills that help you generate code faster, maintain consistency, and follow best practices. Each skill is carefully crafted to solve specific development challenges with high-quality, type-safe code generation.
 
-## Features
+## Available Skills
 
-- ✅ **Type-safe forms** with TypeScript and Yup schema inference
-- ✅ **React Hook Form** integration with yupResolver
-- ✅ **shadcn/ui components** - Beautiful, accessible form components
-- ✅ **Apollo Client mutations** with automatic refetch queries
-- ✅ **Toast notifications** for success/error handling
-- ✅ **Multiple field types**:
-  - Text inputs
-  - Currency inputs (with number formatting)
-  - Date pickers
-  - Radio groups (Yes/No)
-  - Textareas
-  - Async select (single/multi)
-- ✅ **Validation patterns** with proper error messages
-- ✅ **Loading states** and disabled form handling
-- ✅ **Accessibility** built-in with shadcn/ui
+### 1. Shadcn Form Generator
+**Category**: Frontend | **Status**: Stable | **Version**: 1.0.0
+
+Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation.
+
+**Features**:
+- Type-safe forms with TypeScript
+- 10+ field types (text, currency, date, select, etc.)
+- Built-in validation and error handling
+- Apollo Client integration
+- Accessibility built-in
+
+**Command**: `/shadcn-form-generator`
+
+[📖 Full Documentation](skills/shadcn-form-generator/README.md)
+
+---
+
+### Coming Soon
+- API Client Generator
+- Component Story Generator
+- E2E Test Generator
+- And more...
+
+Want to contribute a skill? See [Creating Skills Guide](docs/CREATING_SKILLS.md)
 
 ## Installation
 
-### Prerequisites
+### Quick Install (Recommended)
 
-- [Claude Code](https://claude.com/claude-code) installed
-- A project using:
-  - React 18+
-  - TypeScript
-  - shadcn/ui
-  - React Hook Form
-  - Yup
-  - Apollo Client (optional, for GraphQL mutations)
-
-### Quick Install (Choose One)
-
-#### Option 1: NPM Package (Recommended)
+Install all skills with one command:
 
 ```bash
-npm install --save-dev claude-shadcn-form-generator
+# Using curl
+curl -fsSL https://raw.githubusercontent.com/voxuanthuan/waddle-skill/main/scripts/install.sh | bash
+
+# Or using npm
+npm install --save-dev waddle-skills
+npx waddle-skills-install
 ```
 
-The skill will be automatically installed to `.claude/skills/` after installation.
-
-#### Option 2: One-Line Installer
+### Install Specific Skills
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/claude-shadcn-form-generator/main/install.sh | bash
+# Clone the repository
+git clone https://github.com/voxuanthuan/waddle-skill.git
+cd waddle-skill
+
+# Install specific skills
+node scripts/install.js shadcn-form-generator
+
+# Or install all
+node scripts/install.js --all
 ```
 
-#### Option 3: Manual Download
+### Manual Installation
 
 ```bash
+# Create skills directory
 mkdir -p .claude/skills
-curl -o .claude/skills/shadcn-form-generator.md https://raw.githubusercontent.com/YOUR_USERNAME/claude-shadcn-form-generator/main/shadcn-form-generator.md
+
+# Download specific skill
+curl -o .claude/skills/shadcn-form-generator.md \
+  https://raw.githubusercontent.com/voxuanthuan/waddle-skill/main/skills/shadcn-form-generator/skill.md
 ```
 
-### For Teams & Organizations
+## For Teams & Organizations
 
-Setting this up for your team? See our comprehensive guides:
+Setting this up for your team? We've got you covered:
 
-- **[Installation Guide](INSTALLATION.md)** - 9 different installation methods
-- **[Team Distribution Guide](TEAM_GUIDE.md)** - Share with coworkers easily
-- **[Marketplace Setup](MARKETPLACE.md)** - Create your own skill marketplace
-
-The skill will be automatically available in Claude Code after installation!
+- **[Installation Guide](docs/INSTALLATION.md)** - 9 different installation methods
+- **[Team Distribution Guide](docs/TEAM_GUIDE.md)** - Share with coworkers easily
+- **[Marketplace Setup](docs/MARKETPLACE.md)** - Create your own skill marketplace
+- **[Creating Skills Guide](docs/CREATING_SKILLS.md)** - Add your own skills
 
 ## Usage
 
-### Basic Usage
-
-Invoke the skill in Claude Code:
+After installation, skills are immediately available in Claude Code:
 
 ```
 /shadcn-form-generator
 ```
 
-Or use the Skill command and follow the interactive prompts.
+Each skill will:
+1. Ask you for required information
+2. Generate production-ready code
+3. Follow best practices automatically
+4. Include proper error handling and types
 
-### Example 1: Simple Contact Form
-
-**Prompt:**
-```
-Create a ContactForm with:
-- name (required text)
-- email (required email)
-- message (required textarea)
-- Mutation: CREATE_CONTACT_MESSAGE
-- Success: "Message sent successfully!"
-```
-
-**Generated Output:**
-```typescript
-// Generates complete form component with:
-// - Yup validation schema
-// - React Hook Form setup
-// - FormFields for each input
-// - Apollo mutation integration
-// - Error handling
-```
-
-### Example 2: Product Form with Complex Fields
-
-**Prompt:**
-```
-Create a ProductForm with:
-- name (required text)
-- price (required currency)
-- category (required select)
-- isActive (required radio yes/no)
-- releaseDate (optional date)
-- description (optional textarea)
-- Mutation: CREATE_PRODUCT
-- Refetch: PRODUCTS_QUERY
-- Success: "Product created successfully!"
-```
-
-### Example 3: User Assignment Form
-
-**Prompt:**
-```
-Create an AssignUserForm with:
-- role (required select)
-- users (required multi-select)
-- startDate (required date)
-- Mutation: ASSIGN_USERS_TO_ROLE
-- Props: roleId: string, onComplete: () => void
-```
-
-## Field Types Reference
-
-The skill supports the following field types:
-
-| Type | Description | Validation Options |
-|------|-------------|-------------------|
-| `text` | Standard text input | required, min, max, pattern |
-| `email` | Email input with validation | required, email |
-| `number` | Numeric input | required, min, max, positive |
-| `currency` | Formatted currency input | required, min, max, positive |
-| `date` | Date picker | required, min, max |
-| `textarea` | Multi-line text | required, min, max |
-| `radio` | Yes/No radio group | required |
-| `select` | Async single select | required |
-| `multi-select` | Async multi select | required, min items |
-| `checkbox` | Single checkbox | required |
-
-## Customization
-
-The skill generates forms following these conventions:
-
-- **Required fields**: Marked with red asterisk (*)
-- **Error messages**: Red text below fields
-- **Submit button**: Primary variant, disabled during loading
-- **Validation mode**: `onChange` for real-time feedback
-- **Success/Error toasts**: Automatic handling with proper messages
-
-You can customize the generated code after creation to fit your specific needs.
-
-## Project Structure
+## Repository Structure
 
 ```
-.
-├── README.md                          # This file
-├── shadcn-form-generator.md          # The Claude Code skill
-├── INSTALLATION.md                    # Comprehensive installation guide
-├── TEAM_GUIDE.md                      # Team distribution guide
-├── MARKETPLACE.md                     # Marketplace setup guide
-├── package.json                       # NPM package configuration
-├── install.sh                         # Shell installation script
-├── install.js                         # Node.js installation script
-├── examples/                          # Example generated forms
-│   ├── contact-form.tsx
-│   ├── product-form.tsx
-│   └── user-assignment-form.tsx
+waddle-skills/
+├── skills/                       # All skill definitions
+│   ├── shadcn-form-generator/
+│   │   ├── skill.md             # Skill prompt
+│   │   ├── README.md            # Documentation
+│   │   └── examples/            # Working examples
+│   └── [more-skills]/
+├── scripts/                      # Installation scripts
+│   ├── install.js               # Node.js installer
+│   └── install.sh               # Shell installer
+├── templates/                    # Skill creation templates
+│   ├── skill-template.md
+│   └── README-template.md
+├── docs/                         # Documentation
+│   ├── INSTALLATION.md
+│   ├── CREATING_SKILLS.md
+│   ├── TEAM_GUIDE.md
+│   └── MARKETPLACE.md
+├── skills.json                   # Skills registry
+├── package.json
+├── README.md                     # This file
 └── LICENSE
 ```
 
-## Dependencies
+## Skills by Category
 
-Your project should have these dependencies installed:
+### Frontend
+- [Shadcn Form Generator](skills/shadcn-form-generator/) - React forms with shadcn/ui
+
+### Backend
+- *Coming soon*
+
+### Full-Stack
+- *Coming soon*
+
+### DevOps
+- *Coming soon*
+
+### Testing
+- *Coming soon*
+
+## Creating Your Own Skills
+
+Want to add a new skill? It's easy!
+
+1. **Copy the template**:
+   ```bash
+   cp -r templates/ skills/your-skill-name/
+   ```
+
+2. **Edit the skill prompt**: `skills/your-skill-name/skill.md`
+
+3. **Add examples**: Create working examples in `examples/`
+
+4. **Register in skills.json**: Add your skill metadata
+
+5. **Test locally**: Copy to `.claude/skills/` and test
+
+6. **Submit a PR**: Share with the community!
+
+See the [Creating Skills Guide](docs/CREATING_SKILLS.md) for detailed instructions.
+
+## Skills Manifest
+
+All skills are registered in `skills.json`:
 
 ```json
 {
-  "dependencies": {
-    "react": "^18.0.0",
-    "react-hook-form": "^7.0.0",
-    "yup": "^1.0.0",
-    "@hookform/resolvers": "^3.0.0",
-    "@apollo/client": "^3.0.0",
-    "react-toast-notifications": "^2.0.0"
-  }
+  "id": "skill-id",
+  "name": "Skill Name",
+  "description": "What it does",
+  "version": "1.0.0",
+  "category": "frontend|backend|fullstack|devops|testing",
+  "status": "stable|beta|experimental",
+  "installCommand": "/skill-command"
 }
 ```
 
-For shadcn/ui components, follow the [shadcn/ui installation guide](https://ui.shadcn.com/docs/installation).
+## Contributing
+
+We welcome contributions! Here's how:
+
+### Adding Skills
+1. Fork the repository
+2. Create a new skill following our [Creating Skills Guide](docs/CREATING_SKILLS.md)
+3. Add examples and documentation
+4. Register in `skills.json`
+5. Submit a Pull Request
+
+### Improving Existing Skills
+1. Test the skill thoroughly
+2. Identify improvement areas
+3. Make changes with clear reasoning
+4. Update version number
+5. Submit a Pull Request
+
+### Reporting Issues
+- Use GitHub Issues
+- Include skill name and version
+- Provide example input/output
+- Describe expected vs actual behavior
 
 ## Best Practices
 
-The skill enforces these best practices:
+All skills in this repository follow these principles:
 
-1. **Type Safety**: All forms are fully typed with TypeScript
-2. **Validation**: Yup schemas with proper labels for error messages
-3. **Accessibility**: Using shadcn/ui's accessible components
-4. **Error Handling**: Consistent error handling with toast notifications
-5. **Performance**: useCallback for submit handlers, proper memoization
-6. **UX**: Loading states, disabled inputs, real-time validation
+1. **Type Safety**: Full TypeScript support
+2. **Modern Patterns**: Current best practices
+3. **Error Handling**: Comprehensive error handling
+4. **Accessibility**: WCAG compliance where applicable
+5. **Performance**: Optimized patterns
+6. **Security**: Secure code generation
+7. **Documentation**: Clear, comprehensive docs
+8. **Examples**: Working, real-world examples
 
-## Contributing
+## Requirements
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- [Claude Code](https://claude.com/claude-code) installed
+- Project-specific dependencies (varies by skill)
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Version History
+
+### v1.0.0 (2025-10-20)
+- Initial release
+- Shadcn Form Generator skill
+- Multi-skill infrastructure
+- Installation scripts
+- Documentation suite
+- Skill creation templates
+
+## Roadmap
+
+- [ ] Additional form components (multi-step, wizard)
+- [ ] API client generator
+- [ ] Component story generator (Storybook)
+- [ ] E2E test generator (Playwright/Cypress)
+- [ ] Database migration generator
+- [ ] GraphQL schema generator
+- [ ] CLI tool generator
+- [ ] Docker compose generator
+- [ ] CI/CD pipeline generator
+- [ ] Documentation generator
+
+Vote for features or suggest new skills in [GitHub Discussions](https://github.com/voxuanthuan/waddle-skill/discussions)!
+
+## Community
+
+- **GitHub**: [voxuanthuan/waddle-skill](https://github.com/voxuanthuan/waddle-skill)
+- **Issues**: [Report bugs or request features](https://github.com/voxuanthuan/waddle-skill/issues)
+- **Discussions**: [Ask questions, share ideas](https://github.com/voxuanthuan/waddle-skill/discussions)
+- **Twitter**: [@voxuanthuan](https://twitter.com/voxuanthuan) (if applicable)
+
+## FAQ
+
+### How do I update skills?
+Run the installation script again - it will update existing skills.
+
+### Can I modify skills after installation?
+Yes! Skills are just markdown files in `.claude/skills/`. Edit as needed.
+
+### How do I uninstall a skill?
+Delete the skill file from `.claude/skills/`.
+
+### Can I use these skills commercially?
+Yes! All skills are MIT licensed.
+
+### How do I create a private skill for my team?
+See the [Team Distribution Guide](docs/TEAM_GUIDE.md).
+
+## Support
+
+- 📖 [Documentation](docs/)
+- 🐛 [Report Issues](https://github.com/voxuanthuan/waddle-skill/issues)
+- 💬 [Discussions](https://github.com/voxuanthuan/waddle-skill/discussions)
+- 📧 Email: [your-email] (optional)
+
+## Acknowledgments
+
+- Built for [Claude Code](https://claude.com/claude-code)
+- Inspired by the Claude Code community
+- Special thanks to all contributors
 
 ## License
 
 MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- Built for [Claude Code](https://claude.com/claude-code)
-- Uses [shadcn/ui](https://ui.shadcn.com) components
-- Inspired by modern React form patterns
-
-## Documentation
-
-- **[Installation Guide](INSTALLATION.md)** - Multiple installation methods
-- **[Team Guide](TEAM_GUIDE.md)** - Share with your team
-- **[Marketplace Guide](MARKETPLACE.md)** - Create a skill marketplace
-- **[Examples](./examples)** - Sample generated forms
-
-## Support
-
-If you have questions or need help:
-
-- Open an issue on GitHub
-- Check the [examples](./examples) directory
-- Read the [Claude Code documentation](https://docs.claude.com/claude-code)
-
-## Changelog
-
-### v1.0.0 (2025-10-20)
-- Initial release
-- Support for 10+ field types
-- Apollo Client integration
-- Complete TypeScript support
-- Toast notifications
-- Validation with Yup
-
 ---
 
 Made with ❤️ for the Claude Code community
+
+**Star this repo if you find it useful!** ⭐

@@ -1,0 +1,40 @@
+{
+  "$schema": "./schemas/skills-manifest.schema.json",
+  "version": "1.0.0",
+  "repository": "https://github.com/voxuanthuan/waddle-skill",
+  "skills": [
+    {
+      "id": "shadcn-form-generator",
+      "name": "Shadcn Form Generator",
+      "description": "Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation",
+      "version": "1.0.0",
+      "author": "voxuanthuan",
+      "category": "frontend",
+      "tags": ["react", "forms", "shadcn-ui", "typescript", "validation"],
+      "skillFile": "skills/shadcn-form-generator/skill.md",
+      "readme": "skills/shadcn-form-generator/README.md",
+      "examples": [
+        "skills/shadcn-form-generator/examples/contact-form.tsx",
+        "skills/shadcn-form-generator/examples/product-form.tsx"
+      ],
+      "dependencies": {
+        "react": "^18.0.0",
+        "react-hook-form": "^7.0.0",
+        "yup": "^1.0.0",
+        "@hookform/resolvers": "^3.0.0"
+      },
+      "status": "stable",
+      "installCommand": "/shadcn-form-generator"
+    }
+  ],
+  "metadata": {
+    "totalSkills": 1,
+    "lastUpdated": "2025-10-20",
+    "maintainers": [
+      {
+        "name": "voxuanthuan",
+        "github": "voxuanthuan"
+      }
+    ]
+  }
+}
