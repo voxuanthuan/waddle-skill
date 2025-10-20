@@ -14,31 +14,15 @@
     {
       "name": "form-skill",
       "source": {
-        "type": "github",
+        "source": "github",
         "repo": "voxuanthuan/waddle-skill",
         "path": "skills/form-skill/skill.md"
       },
       "description": "Generate production-ready React forms with shadcn/ui, React Hook Form, and Yup validation",
       "version": "1.0.0",
       "author": {
-        "name": "voxuanthuan",
-        "github": "voxuanthuan"
-      },
-      "category": "frontend",
-      "tags": ["react", "forms", "shadcn-ui", "typescript", "validation"],
-      "dependencies": {
-        "react": "^18.0.0",
-        "react-hook-form": "^7.0.0",
-        "yup": "^1.0.0",
-        "@hookform/resolvers": "^3.0.0"
-      },
-      "status": "stable",
-      "installCommand": "/form-skill",
-      "readme": "https://github.com/voxuanthuan/waddle-skill/blob/main/skills/form-skill/README.md",
-      "examples": [
-        "https://github.com/voxuanthuan/waddle-skill/blob/main/skills/form-skill/examples/contact-form.tsx",
-        "https://github.com/voxuanthuan/waddle-skill/blob/main/skills/form-skill/examples/product-form.tsx"
-      ]
+        "name": "voxuanthuan"
+      }
     }
   ],
   "metadata": {
